@@ -3,24 +3,17 @@ import logo from './logo.svg';
 import './App.css';
 import axios from 'axios'
 
-const baseUrl = 'https://swapi.co/api/people/'
+const baseUrl = 'https://swapi.co/api/people'
 
 class App extends Component {
   state = {
     starWarsLoop: [],
   }
   componentDidMount() {
-    const starWarsData = [];
-    for (let i = 1; i <= 5; i++) {
-      starWarsData.push(axios.get(`${baseUrl}/${i}`))
-    }
-    Promise.all(starWarsData)
-      .then((response) => {
+    axios.get(baseUrl)
+    .then((response) => {
         this.setState({
-          starWarsLoop: response.map((e, i) => {
-            console.log(e.data)
-            return e.data
-          })
+          starWarsLoop: response.data.results
         })
       })
   }

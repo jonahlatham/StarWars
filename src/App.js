@@ -10,16 +10,28 @@ class App extends Component {
     starWarsLoop: [],
   }
   componentDidMount() {
-    axios.get(baseUrl)
+    axios.get(`${baseUrl}`)
     .then((response) => {
         this.setState({
           starWarsLoop: response.data.results
         })
+        console.log(response)
       })
+  }
+  getFilms = (obj) => {
+    const filmUrls = obj.starships.map((e,i) => {
+      return axios.get(e)
+    })
+    Promise.all(filmUrls)
+    .then((response) => {
+      console.log(response.map((e,i)=>{
+        return e.data
+      }))
+    })
   }
   render() {
     const starWarsGuys = this.state.starWarsLoop.map((e, i) => {
-      return <div key={i}>{e.name}</div>
+      return <div onClick={() => {this.getFilms(e)}} key={i}>{e.name}({e.films.length})</div>
     })
     return (
       <div className="App">

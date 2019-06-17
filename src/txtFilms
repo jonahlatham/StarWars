@@ -2,36 +2,40 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios'
-import LoopedCard from './LoopedCard'
 
 const baseUrl = 'https://swapi.co/api/people'
 
 class App extends Component {
   state = {
-    cards: [],
-    deadCards: [],
-    bkrnd: '',
-    fnt: '',
+    starWarsLoop: [],
   }
   componentDidMount() {
     axios.get(`${baseUrl}`)
-      .then((response) => {
+    .then((response) => {
         this.setState({
-          cards: response.data.results,
-          deadCards: response.data.results
+          starWarsLoop: response.data.results
         })
+        console.log(response)
       })
   }
+  getFilms = (obj) => {
+    const filmUrls = obj.starships.map((e,i) => {
+      return axios.get(e)
+    })
+    Promise.all(filmUrls)
+    .then((response) => {
+      console.log(response.map((e,i)=>{
+        return e.data
+      }))
+    })
+  }
   render() {
-    const loopedCards = this.state.cards.map((e, i) => {
-      return <LoopedCard key={i} card={e}/>
-      //  style={{backgroundColor: this.state.bkrnd, color: this.state.fnt}} 
+    const starWarsGuys = this.state.starWarsLoop.map((e, i) => {
+      return <div onClick={() => {this.getFilms(e)}} key={i}>{e.name}({e.films.length})</div>
     })
     return (
       <div className="App">
-        <div className='cards'>
-          {loopedCards}
-        </div>
+        {starWarsGuys}
       </div>
     );
   }

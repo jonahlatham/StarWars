@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios'
-import LoopedCard from './LoopedCard'
 
 const baseUrl = 'https://swapi.co/api/people'
 
@@ -10,8 +9,6 @@ class App extends Component {
   state = {
     cards: [],
     deadCards: [],
-    bkrnd: '',
-    fnt: '',
   }
   componentDidMount() {
     axios.get(`${baseUrl}`)
@@ -23,9 +20,17 @@ class App extends Component {
       })
   }
   render() {
+    const info = this.state.cards.map((e, i) => {
+      return <div className='infoBox'>
+        Gender: {e.gender} <br />
+        Height: {e.height} <br />
+        Hair Color: {e.hair_color} <br />
+        Skin Color: {e.skin_color} <br />
+        Eye Color: {e.eye_color} <br />
+      </div>
+    })
     const loopedCards = this.state.cards.map((e, i) => {
-      return <LoopedCard key={i} card={e}/>
-      //  style={{backgroundColor: this.state.bkrnd, color: this.state.fnt}} 
+      return <div className='hitCards' key={i}><u>{e.name}</u> {info[i]}</div>
     })
     return (
       <div className="App">

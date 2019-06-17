@@ -42,5 +42,5 @@ export default App;
 // star wars characters
 // make a hit list for boba fett
 // button called kill
-// when kill it moves car from left to right and
-        // changes it 
+// when killed card moves from left to right and
+        // changes from green to red

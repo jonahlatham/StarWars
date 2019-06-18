@@ -1,6 +1,7 @@
 .App {
   text-align: center;
   margin-top: 25px;
+  display: flex;
 }
 
 .App-logo {
@@ -40,12 +41,8 @@
   margin: auto;
   margin-bottom: 10px;
   padding-top: 10px;
+  margin-top: 10px;
   color: red;
-}
-
-.cards {
-  display: flex;
-  flex-wrap: wrap;
 }
 
 .infoBox {
@@ -71,4 +68,53 @@
 
 .killBtn:focus{
   outline: none;
+}
+
+.killSide {
+  width: 50%;
+  height: 1000px;
+  border-style: solid;
+  border-width: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+}
+
+.toBeKilledSide {
+  width: 50%;
+  height: 1000px;
+  border-style: solid;
+  border-width: 5px;
+}
+
+.upDown {
+  flex-direction: column;
+}
+
+.words {
+  display: flex;
+  justify-content: space-around;
+
+}
+
+.sideSide {
+  display: flex;
+}
+
+.kill {
+  background: black;
+  color: red;
+  width: 100px;
+  border-radius: 15px;
+  margin-bottom: 10px;
+  font-size: 35px;
+}
+
+.killed {
+  background: red;
+  color: black;
+  width: 100px;
+  border-radius: 15px;
+  margin-bottom: 10px;
+  font-size: 35px;
 }

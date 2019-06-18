@@ -24,13 +24,23 @@ class App extends Component {
   }
   render() {
     const loopedCards = this.state.cards.map((e, i) => {
-      return <LoopedCard key={i} card={e}/>
+      return <LoopedCard key={i} card={e} />
       //  style={{backgroundColor: this.state.bkrnd, color: this.state.fnt}} 
     })
     return (
       <div className="App">
-        <div className='cards'>
-          {loopedCards}
+        <div className='upDown'>
+          <div className='words'>
+            <div className='kill'>Kill</div>
+            <div className='killed'>Killed</div>
+          </div>
+          <div className='sideSide'>
+            <div className='killSide'>
+              {loopedCards}
+            </div>
+            <div className='toBeKilledSide'>
+            </div>
+          </div>
         </div>
       </div>
     );

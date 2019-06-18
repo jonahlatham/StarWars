@@ -1,21 +1,9 @@
 import React, { Component } from 'react'
 
 class LoopedCard extends Component {
-    state={
-        backgroundColor: 'black',
-        fontColor: 'red',
-        buttonText: 'Kill',
-    }
-    handleKill = () => {
-        this.setState({
-            backgroundColor : this.state.backgroundColor === 'red' ? 'black' : 'red',
-            fontColor : this.state.fontColor === 'black' ? 'red' : 'black',
-            buttonText : this.state.buttonText === 'Revive' ? 'Kill' : 'Revive'
-        })
-    }
     render() {
         return (
-            <div className='hitCards' style={{ backgroundColor: this.state.backgroundColor, color : this.state.fontColor }}>
+            <div className='hitCards' style={{ backgroundColor: this.props.color, color : this.props.name }}>
                 <u>{this.props.card.name}</u>
                 <div className='infoBox' >
                     Gender: {this.props.card.gender} <br />
@@ -24,7 +12,7 @@ class LoopedCard extends Component {
                     Skin Color: {this.props.card.skin_color} <br />
                     Eye Color: {this.props.card.eye_color} <br />
                 </div>
-                <button className='killBtn' onClick={this.handleKill}>{this.state.buttonText}</button>
+                <button className='killBtn' onClick={() => {this.props.handleKill(this.props.card)}}>kill</button>
             </div>
         )
     }

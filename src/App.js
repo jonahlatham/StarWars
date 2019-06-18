@@ -10,22 +10,32 @@ class App extends Component {
   state = {
     cards: [],
     deadCards: [],
-    bkrnd: '',
-    fnt: '',
   }
   componentDidMount() {
     axios.get(`${baseUrl}`)
       .then((response) => {
         this.setState({
           cards: response.data.results,
-          deadCards: response.data.results
         })
       })
   }
+  handleKill = (obj) => {
+    const toKillList = this.state.cards.filter((e, i) => {
+      return e.url !== obj.url
+    })
+    const deadList = [...this.state.deadCards, obj]
+    this.setState({
+      cards: toKillList,
+      deadCards: deadList
+    })
+  }
   render() {
     const loopedCards = this.state.cards.map((e, i) => {
-      return <LoopedCard key={i} card={e} />
+      return <LoopedCard key={i} card={e} handleKill={this.handleKill} />
       //  style={{backgroundColor: this.state.bkrnd, color: this.state.fnt}} 
+    })
+    const deadGuys = this.state.deadCards.map((e, i) => {
+      return <LoopedCard key={i} card={e} name={'black'} color={'red'} handleKill={this.handleKill} />
     })
     return (
       <div className="App">
@@ -39,6 +49,7 @@ class App extends Component {
               {loopedCards}
             </div>
             <div className='toBeKilledSide'>
+              {deadGuys}
             </div>
           </div>
         </div>

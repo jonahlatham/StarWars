@@ -32,7 +32,6 @@ class App extends Component {
   render() {
     const loopedCards = this.state.cards.map((e, i) => {
       return <LoopedCard key={i} card={e} handleKill={this.handleKill} />
-      //  style={{backgroundColor: this.state.bkrnd, color: this.state.fnt}} 
     })
     const deadGuys = this.state.deadCards.map((e, i) => {
       return <LoopedCard key={i} card={e} name={'black'} color={'red'} handleKill={this.handleKill} />
